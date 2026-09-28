@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/* Light-only palette: warm drafting paper, ink, terracotta, sage, blueprint. */
+@theme {
+  --color-paper: #f4efe6;
+  --color-card: #fbf8f2;
+  --color-ink: #1d2733;
+  --color-ink-2: #4b5563;
+  --color-ink-3: #7b8491;
+  --color-line: #ddd3c2;
+  --color-line-2: #ebe4d7;
+  --color-brick: #b4532a;
+  --color-brick-2: #93401d;
+  --color-sage: #5c7a5e;
+  --color-sage-2: #e3ebe0;
+  --color-blueprint: #2c5a85;
+  --color-blueprint-2: #e2eaf2;
+  --color-ochre: #c28a1e;
+  --color-ochre-2: #f5ead1;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Faint drafting grid on the page background. */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, rgba(44, 90, 133, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(44, 90, 133, 0.045) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-md border px-3.5 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn border-brick bg-brick text-white hover:bg-brick-2;
+}
+@utility btn-ghost {
+  @apply btn border-line bg-card text-ink hover:border-ink-3;
+}
+@utility btn-quiet {
+  @apply btn border-transparent bg-transparent text-ink-2 hover:bg-line-2 hover:text-ink;
+}
+@utility input {
+  @apply w-full rounded-md border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-ink-3 focus:border-blueprint focus:ring-2 focus:ring-blueprint/15 focus:outline-none;
+}
+@utility label {
+  @apply mb-1 block text-xs font-semibold tracking-wide text-ink-2 uppercase;
+}
+@utility card {
+  @apply rounded-xl border border-line bg-card;
+}
+@utility chip {
+  @apply inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium;
+}
+@utility eyebrow {
+  @apply font-mono text-[11px] tracking-[0.14em] text-ink-3 uppercase;
+}
