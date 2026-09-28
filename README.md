@@ -23,7 +23,15 @@ cp .env.example .env.local   # then fill in keys (see below)
 npm run dev                  # http://localhost:3000
 ```
 
-For production: `npm run build && npm start`, or the Docker image (below).
+### On your phone (same WiFi)
+
+```bash
+npm run lan
+```
+
+This builds the app, serves it on your network and prints the address to open on other devices, e.g. `http://192.168.1.23:3000`. The computer has to stay awake with the terminal open. If the phone can't connect: allow Node through the firewall when macOS/Windows asks (Windows: "Private networks"), and check both devices are on the same network (guest WiFi usually isolates devices). The address can change when the router restarts — run it again and use the new one.
+
+Everything is saved on the computer running it (the `data/` folder), so you both see the same houses.
 
 ### Keys
 

@@ -6,8 +6,10 @@ export async function POST(req: Request) {
   if (!expected) return Response.json({ ok: true });
   if (!passcode || passcode !== expected) return Response.json({ error: "That passcode isn't right." }, { status: 401 });
   const token = await passcodeToken(expected);
+  // Only mark the cookie Secure over HTTPS — on http://<LAN IP> a Secure cookie would be dropped and the passcode would loop.
+  const https = (req.headers.get("x-forwarded-proto") ?? new URL(req.url).protocol.replace(":", "")) === "https";
   return Response.json(
     { ok: true },
-    { headers: { "set-cookie": `hh_auth=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${60 * 60 * 24 * 365}${process.env.NODE_ENV === "production" ? "; Secure" : ""}` } },
+    { headers: { "set-cookie": `hh_auth=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${60 * 60 * 24 * 365}${https ? "; Secure" : ""}` } },
   );
 }
